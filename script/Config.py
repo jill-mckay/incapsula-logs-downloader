@@ -71,6 +71,16 @@ class Config:
                 config_parser.get('SETTINGS', 'IMPERVA_SPLUNK_HEC_SOURCE', fallback="log_downloader"))
             config.SPLUNK_HEC_SOURCETYPE = os.environ.get('IMPERVA_SPLUNK_HEC_SOURCETYPE',
                 config_parser.get('SETTINGS', 'IMPERVA_SPLUNK_HEC_SOURCETYPE', fallback="imperva:cef"))
+            config.ELASTIC_ENABLE = os.environ.get('IMPERVA_ELASTIC_ENABLE',
+                config_parser.get('SETTINGS', 'IMPERVA_ELASTIC_ENABLE', fallback="NO"))
+            config.ELASTIC_URL = os.environ.get('IMPERVA_ELASTIC_URL',
+                config_parser.get('SETTINGS', 'IMPERVA_ELASTIC_URL', fallback=""))
+            config.ELASTIC_API_KEY = os.environ.get('IMPERVA_ELASTIC_API_KEY',
+                config_parser.get('SETTINGS', 'IMPERVA_ELASTIC_API_KEY', fallback=""))
+            config.ELASTIC_INDEX = os.environ.get('IMPERVA_ELASTIC_INDEX',
+                config_parser.get('SETTINGS', 'IMPERVA_ELASTIC_INDEX', fallback="logs-imperva.waf-default"))
+            config.ELASTIC_PIPELINE = os.environ.get('IMPERVA_ELASTIC_PIPELINE',
+                config_parser.get('SETTINGS', 'IMPERVA_ELASTIC_PIPELINE', fallback=""))
             return config
         else:
             self.logger.error("Could Not find configuration file %s", config_file)

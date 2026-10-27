@@ -1,5 +1,6 @@
 certifi==2024.2.2
 charset-normalizer==3.3.2
+elasticsearch>=8.0,<9.0
 idna==3.6
 M2Crypto==0.40.1
 pycryptodome==3.20.0

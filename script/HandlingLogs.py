@@ -54,6 +54,11 @@ class HandlingLogs:
             self.logger.info('Splunk HEC enabled.')
             self.remote_logger = HttpClient(self.config, self.logger)
 
+        if self.config.ELASTIC_ENABLE == "YES":
+            self.logger.info('Elastic enabled.')
+            from ElasticClient import ElasticClient
+            self.remote_logger = ElasticClient(self.config, self.logger)
+
     def watch_files(self):
         while self.RUNNING:
             try:

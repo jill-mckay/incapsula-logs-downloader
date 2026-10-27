@@ -119,7 +119,7 @@ class LogsDownloader:
         # create a logs file index handler
         self.logs_file_index = LogsFileIndex(self.config, self.logger, self.file_downloader, self.config_path)
         # Configure the remote logger, whether it be SYSLOG or Splunk HEC
-        if self.config.SYSLOG_ENABLE == 'YES' or self.config.SPLUNK_HEC == 'YES':
+        if self.config.SYSLOG_ENABLE == 'YES' or self.config.SPLUNK_HEC == 'YES' or self.config.ELASTIC_ENABLE == 'YES':
             self.file_watcher = HandlingLogs(self.config, self.logger)
             self.file_watcher_thread = threading.Thread(target=self.file_watcher.watch_files, name="file_watcher_thread")
             self.file_watcher_thread.start()
@@ -368,7 +368,7 @@ class LogsDownloader:
             self.logger.info("Got a termination signal, will now shutdown and exit gracefully")
 
             self.logger.debug("Terminating {} worker threads in thread pool.".format(current_threads))
-            if self.config.SYSLOG_ENABLE == 'YES' or self.config.SPLUNK_HEC == 'YES':
+            if self.config.SYSLOG_ENABLE == 'YES' or self.config.SPLUNK_HEC == 'YES' or self.config.ELASTIC_ENABLE == 'YES':
                 self.file_watcher.RUNNING = False
                 self.logger.warning("File Watcher Pool Running set to False.")
                 self.file_watcher.pool.terminate()
